@@ -10,19 +10,15 @@ import os
 st.title("♻️ Waste Classifier AI")
 st.write("Upload a photo of your trash, and our AI will tell you what it is!")
 
-# --- NEW: Download the brain from Google Drive if it isn't here yet ---
+# --- NEW: Download the brain from GitHub Release if it isn't here yet ---
 MODEL_PATH = 'waste_model.pth'
 if not os.path.exists(MODEL_PATH):
-    st.write("First time setup: Waking up the AI's brain... (takes a few seconds)")
-    
-    drive_link = "https://drive.google.com/file/d/1s4qVDXWxWBkxDK9LBGkJLrIavuKstx-d/view?usp=share_link"
-    
-    try:
-        file_id = drive_link.split('/d/')[1].split('/')[0]
-        direct_download_url = f'https://drive.google.com/uc?export=download&id={file_id}'
-        urllib.request.urlretrieve(direct_download_url, MODEL_PATH)
-    except Exception as e:
-        st.error("Could not download the brain file. Double check your Google Drive link configuration!")
+    with st.spinner("First time setup: Waking up the AI's brain... (takes a few seconds)"):
+        release_url = "https://github.com/an-sh-55/waste-classification-ai/releases/download/v1.0/waste_model.pth"
+        try:
+            urllib.request.urlretrieve(release_url, MODEL_PATH)
+        except Exception as e:
+            st.error(f"Could not download the brain file: {e}")
 
 # Rebuild the brain structure
 model = models.resnet18()
