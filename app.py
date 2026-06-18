@@ -41,12 +41,12 @@ if uploaded_file is not None:
     st.image(image, caption='Your Photo', use_container_width=True)
     st.write("AI is thinking...")
     
-  test_transform = transforms.Compose([
+    test_transform = transforms.Compose([
         transforms.Resize((224, 224)),
         transforms.ToTensor(),
-        # This fixes the color math so the AI reads the pixels correctly:
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     ])
+    
     input_tensor = test_transform(image).unsqueeze(0)
     
     with torch.no_grad():
