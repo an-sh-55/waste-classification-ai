@@ -10,10 +10,10 @@ import os
 st.title("♻️ Waste Classifier AI")
 st.write("Upload a photo of your trash, and our AI will tell you what it is!")
 
-# --- NEW: Download the brain from GitHub Release if it isn't here yet ---
-MODEL_PATH = 'waste_model.pth'
+# --- FORCE A FRESH DOWNLOAD BY CHANGING THE NAME TO V1 ---
+MODEL_PATH = 'waste_model_v1.pth'
 if not os.path.exists(MODEL_PATH):
-    with st.spinner("First time setup: Waking up the AI's brain... (takes a few seconds)"):
+    with st.spinner("Downloading the fresh AI brain... (takes a few seconds)"):
         release_url = "https://github.com/an-sh-55/waste-classification-ai/releases/download/v1.0/waste_model.pth"
         try:
             urllib.request.urlretrieve(release_url, MODEL_PATH)
